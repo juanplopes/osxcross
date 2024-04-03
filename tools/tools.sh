@@ -464,7 +464,7 @@ function test_compiler()
   fi
 
   echo -ne "testing $1 ... "
-  $1 $2 -O2 -Wall -o test
+  $1 $2 -O2 -Wall -v -o test
 
   if [ $? -eq 0 ]; then
     rm test

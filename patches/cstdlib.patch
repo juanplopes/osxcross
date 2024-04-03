@@ -1,0 +1,6 @@
+144,145c144,145
+< using ::at_quick_exit _LIBCPP_USING_IF_EXISTS;
+< using ::quick_exit _LIBCPP_USING_IF_EXISTS;
+---
+> //using ::at_quick_exit _LIBCPP_USING_IF_EXISTS;
+> //using ::quick_exit _LIBCPP_USING_IF_EXISTS;

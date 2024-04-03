@@ -54,6 +54,10 @@ case $SDK_VERSION in
   13.2*)  TARGET=darwin22.3; X86_64H_SUPPORTED=1; I386_SUPPORTED=0; ARM_SUPPORTED=1; NEED_TAPI_SUPPORT=1; OSX_VERSION_MIN_INT=10.9;  ;;
   13.3*)  TARGET=darwin22.4; X86_64H_SUPPORTED=1; I386_SUPPORTED=0; ARM_SUPPORTED=1; NEED_TAPI_SUPPORT=1; OSX_VERSION_MIN_INT=10.9;  ;;
   14|14.0*)  TARGET=darwin23; X86_64H_SUPPORTED=1; I386_SUPPORTED=0; ARM_SUPPORTED=1; NEED_TAPI_SUPPORT=1; OSX_VERSION_MIN_INT=10.13;  ;;
+  14.1*)  TARGET=darwin23.2; X86_64H_SUPPORTED=1; I386_SUPPORTED=0; ARM_SUPPORTED=1; NEED_TAPI_SUPPORT=1; OSX_VERSION_MIN_INT=10.13;  ;;
+  14.2*)  TARGET=darwin23.3; X86_64H_SUPPORTED=1; I386_SUPPORTED=0; ARM_SUPPORTED=1; NEED_TAPI_SUPPORT=1; OSX_VERSION_MIN_INT=10.13;  ;;
+  14.3*)  TARGET=darwin23.4; X86_64H_SUPPORTED=1; I386_SUPPORTED=0; ARM_SUPPORTED=1; NEED_TAPI_SUPPORT=1; OSX_VERSION_MIN_INT=10.13;  ;;
+  14.4*)  TARGET=darwin23.5; X86_64H_SUPPORTED=1; I386_SUPPORTED=0; ARM_SUPPORTED=1; NEED_TAPI_SUPPORT=1; OSX_VERSION_MIN_INT=10.13;  ;;
  *) echo "Unsupported SDK"; exit 1 ;;
 esac
 
@@ -306,6 +310,11 @@ if [ $(osxcross-cmp $SDK_VERSION ">=" 10.7) -eq 1 ]; then
     fi
     fi
   fi
+  if [ $(osxcross-cmp $SDK_VERSION ">=" 13.0) -eq 1 ]; then
+    echo "SDK needs patching for cstdlib include ..."
+    patch usr/include/c++/v1/cstdlib $PATCH_DIR/cstdlib.patch
+  fi
+
   if [ -f "usr/include/Availability.h" ]; then
     if [ $(osxcross-cmp $SDK_VERSION "==" 10.15) -eq 1 ]; then
       # 10.15 comes with a broken Availability.h header file

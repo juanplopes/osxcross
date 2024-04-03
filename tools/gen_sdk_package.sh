@@ -210,6 +210,9 @@ LIBCXXDIR3="usr/include/c++/v1"
 # Manual directory
 MANDIR="Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man"
 
+# Manual directory
+TOOLCHAINLIB="Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx"
+
 for SDK in $SDKS; do
   echo -n "packaging $(echo "$SDK" | sed -E "s/(.sdk|.pkg)//g") SDK "
   echo "(this may take several minutes) ..."
@@ -240,6 +243,11 @@ for SDK in $SDKS; do
   if [ -d $MANDIR ]; then
     mkdir -p $TMP/$SDK/usr/share/man
     cp -rf $MANDIR/* $TMP/$SDK/usr/share/man
+  fi
+
+  if [ -d $TOOLCHAINLIB ]; then
+    mkdir -p $TMP/$SDK/usr/lib/swift/macosx
+    cp -rf $TOOLCHAINLIB/* $TMP/$SDK/usr/lib/swift/macosx
   fi
 
   popd &>/dev/null
